@@ -1,4 +1,6 @@
-# Data Model with DynamoDB Example - Profile Data
+# DynamoDB Data Modeling
+
+We are using movie data for this example.
 
 ## Strategy
 

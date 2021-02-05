@@ -50,7 +50,7 @@ Run `docker-compose up` to start the container then try to run these command to 
 # Create Table
 aws dynamodb create-table \
 --endpoint-url http://localhost:8111 \
---table-name Music \
+--table-name Movies \
 --attribute-definitions \
     AttributeName=Artist,AttributeType=S \
     AttributeName=SongTitle,AttributeType=S \
@@ -62,4 +62,20 @@ aws dynamodb create-table \
 
 # List Table
 aws dynamodb list-tables --endpoint-url http://localhost:8111
+```
+
+## Reference for Library Installations
+
+1. Using apollo-server-lambda which uses apollo-server as a base and have the wrapper to create lambda handler to convert event data into graphql query.
+
+```bash
+yarn add apollo-server-lambda graphql
+# build error not found these modules, so manually installed them.
+yarn add bufferutil utf-8-validate
+```
+
+2. Using dynamodb-data-mapper as ORM and aws-sdk for connecting to DynamoDb
+
+```bash
+yarn add @aws/dynamodb-data-mapper aws-sdk
 ```
