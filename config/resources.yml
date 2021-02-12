@@ -1,0 +1,15 @@
+MovieTable:
+  Type: 'AWS::DynamoDB::Table'
+  Properties:
+    AttributeDefinitions:
+      - AttributeName: id
+        AttributeType: S
+    KeySchema:
+      - AttributeName: id
+        KeyType: HASH
+    BillingMode: PAY_PER_REQUEST
+    # This is not required because we set BillingMode to Provisioned
+    # ProvisionedThroughput:
+    #   ReadCapacityUnits: 1
+    #   WriteCapacityUnits: 1
+    TableName: ${self:custom.env}_movies

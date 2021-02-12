@@ -1,0 +1,3 @@
+REGION: ap-southeast-2
+ACCOUNT_ID: <your AWS account ID>
+DEPLOYMENT_BUCKET_BASE: <your s3 deployment bucket>
