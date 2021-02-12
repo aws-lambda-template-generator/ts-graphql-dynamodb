@@ -20,6 +20,9 @@ module.exports = {
     path: path.join(__dirname, '.webpack'),
     filename: '[name].js'
   },
+  optimization: {
+    minimize: false, // The graphql schema type names get shortened and without this, we get graphql schema error.
+  },
   target: 'node', // in order to ignore built-in modules like path, fs, etc.
   externals: [nodeExternals()], // in order to ignore all modules in node_modules folder
   module: {
