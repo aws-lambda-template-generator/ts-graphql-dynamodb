@@ -4,7 +4,7 @@
     Title: 'Interview with the Vampire',
     Country: 'United States',
     Director: 'Neil Jordan',
-    Genra: ['Vampire', 'Drama'],
+    Genre: ['Vampire', 'Drama'],
     Cast: [
       {
         Character: 'Louis de Pointe du Lac',
@@ -62,7 +62,7 @@
     Title: 'Blade Runner',
     Country: 'United States',
     Director: 'Ridley Scott',
-    Genra: ['Science Fiction', 'Cyberpunk'],
+    Genre: ['Science Fiction', 'Cyberpunk'],
     Cast: [
       {
         Character: 'Rick Deckard',
@@ -119,7 +119,7 @@
     Title: 'E.T. the Extra-Terrestrial',
     Country: 'United States',
     Director: 'Steven Spielberg',
-    Genra: ['Science Fiction', 'Drama'],
+    Genre: ['Science Fiction', 'Drama'],
     Cast: [
       {
         Character: 'Elliott',
@@ -177,7 +177,7 @@
     Title: 'Scarface',
     Country: 'United States',
     Director: 'Brian De Palma',
-    Genra: ['Crime Fiction', 'Gangster Film'],
+    Genre: ['Crime Fiction', 'Gangster Film'],
     Cast: [
       {
         Character: 'Tony Montana',
@@ -246,7 +246,7 @@
     Title: 'Full Metal Jacket',
     Country: 'United States',
     Director: 'Stanley Kubrick',
-    Genra: ['War'],
+    Genre: ['War'],
     Cast: [
       {
         Character: 'Private/Sergeant J. T. "Joker" Davis',
