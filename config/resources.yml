@@ -9,6 +9,8 @@ MovieTable:
         KeyType: HASH
     BillingMode: PAY_PER_REQUEST
     # This is not required because we set BillingMode to Provisioned
+    # To make dynamodb on demand, all we need to do is to remove ProvisionedThrougput
+    # and add BillingMode
     # ProvisionedThroughput:
     #   ReadCapacityUnits: 1
     #   WriteCapacityUnits: 1
