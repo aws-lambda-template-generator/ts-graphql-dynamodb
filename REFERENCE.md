@@ -161,6 +161,31 @@ aws dynamodb create-table \
     AttributeName=SongTitle,KeyType=RANGE \
 --provisioned-throughput \
     ReadCapacityUnits=10,WriteCapacityUnits=5
+
+
+# Update table with GSI
+aws dynamodb update-table \
+  --endpoint-url http://localhost:8111 \
+  --table-name local_movies \
+  --attribute-definitions AttributeName=title,AttributeType=S \
+  --global-secondary-index-updates \
+  "[{\"Create\":{\"IndexName\": \"MovieTitle-index\",\"KeySchema\":[{\"AttributeName\":\"title\",\"KeyType\":\"HASH\"}], \
+  \"ProvisionedThroughput\": {\"ReadCapacityUnits\": 5, \"WriteCapacityUnits\": 5      },\"Projection\":{\"ProjectionType\":\"ALL\"}}}]"
+
+# Query table with GSI
+ aws dynamodb query \
+  --endpoint-url http://localhost:8111 \
+  --table-name local_movies \
+  --index-name MovieTitle-index \
+  --key-condition-expression "title = :name" \
+  --expression-attribute-values  '{":name":{"S":"Blade Runner"}}'
+
+# Query table by ID (HashKey)
+aws dynamodb query \
+  --endpoint-url http://localhost:8111 \
+  --table-name local_movies \
+  --key-condition-expression "id = :id" \
+  --expression-attribute-values  '{":id":{"S":"8f27c1e4-a827-4544-9bdb-6a849499afda"}}'
 ```
 
 ## Reference for Library Installations
@@ -183,4 +208,32 @@ yarn add @aws/dynamodb-data-mapper aws-sdk @aws/dynamodb-data-mapper-annotations
 
 ```bash
 yarn add --dev serverless-offline
+```
+
+## Reference for dynamodb-data-mapper annotation
+
+```ts
+@table('items')
+class Item {
+  @hashKey({ // <-- this is your normal hash key (shared by table and of LSI)
+    indexKeyConfigurations:{
+      ItemIdIndex: 'HASH' // The key (ItemIdIndex) is the name of the index; the value is the key type ('HASH' or 'RANGE')
+    }
+  })
+  itemId: string;
+
+  @rangeKey() // <-- this is your normal range key (not part of LSI)
+  displayName: string;
+
+  @attribute({
+    // And this other attribute acts as the LSI's RangeKey
+    indexKeyConfigurations: {
+      ItemIdIndex: 'RANGE'
+    }
+  })
+  foo: string;
+
+  @attribute()
+  bar: string;
+}
 ```

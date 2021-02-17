@@ -3,11 +3,14 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "prettier": "prettier --check src/**/*.ts",
+    "fix-prettier": "prettier --write src/**/*.ts src/**/**/*.ts __tests__/**/*.ts",
     "lint": "./node_modules/.bin/eslint ./",
     "lint-fixup": "./node_modules/.bin/eslint ./ --ext .js,.jsx --fix",
+    "check-types": "tsc --noEmit",
     "deploy": "sls deploy --stage test",
     "dev": "sls offline start -r ap-southeast-1 --stage test",
-    "load-fixtures": "ts-node ./fixtures/loadFixture.ts"
+    "load-fixtures": "ts-node ./fixtures/loadFixture.ts && ./fixtures/updateGSI.sh"
   },
   "repository": "",
   "author": "Mdh",
@@ -39,6 +42,8 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-promise": "^4.2.1",
+    "jest": "^26.6.3",
+    "prettier": "^2.2.1",
     "serverless": "^2.21.1",
     "serverless-offline": "^6.5.0",
     "serverless-plugin-git-variables": "^5.1.0",
