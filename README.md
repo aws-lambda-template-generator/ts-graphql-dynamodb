@@ -1,25 +1,33 @@
 # TypeScript Lambda GraphQL with DynamoDb
 
-# In Progress...
+## Tools
+
+- yarn
+- serverless
+- dynamodb
+- docker
+- dynamodb-data-mapper
+- apollo-server-lambda
 
 ## Installation
 
 ```bash
-yarn add apollo-server-lambda graphql
-
-# build error not found these modules, so manually installed them.
-yarn add bufferutil utf-8-validate
+yarn install
 ```
-
-*Tools*
 
 ## Testing lambda locally
 
-Use Serverless Offline.
+To spin up the lambda function, we use Serverless Offline for API gateway and lambda function. We also need to start the local dynamodb container.
 
 ```bash
-# Install
-yarn add --dev serverless-offline
+# start dynamodb
+# First time
+docker-compose up -d
+# Create tables and load fixture data
+yarn load-fixtures
+
+# Once container is created and data are loaded, we can just use this command.
+docker-compose start
 
 # Start local lambda by using sls offline command
 sls offline start -r ap-southeast-1 --stage test
@@ -40,42 +48,17 @@ Rename the folder: `config_template` --> `config` and fill all the necessary inf
 sls deplly --stage test
 ```
 
-## Local DynamoDB
-
-Our local DynamoDB setup will persist the data (see https://www.mydatahack.com/how-to-persist-data-in-local-dynamodb-docker-container).
-
-Run `docker-compose up` to start the container then try to run these command to see if the container works.
+## Useful DynamoDB AWS CLI Commands
 
 ```bash
-# Create Table
-aws dynamodb create-table \
---endpoint-url http://localhost:8111 \
---table-name Movies \
---attribute-definitions \
-    AttributeName=Artist,AttributeType=S \
-    AttributeName=SongTitle,AttributeType=S \
---key-schema \
-    AttributeName=Artist,KeyType=HASH \
-    AttributeName=SongTitle,KeyType=RANGE \
---provisioned-throughput \
-    ReadCapacityUnits=10,WriteCapacityUnits=5
-
 # List Table
 aws dynamodb list-tables --endpoint-url http://localhost:8111
+
+# Scan table to check the loaded data
+aws dynamodb scan --endpoint-url http://localhost:8111 --table-name local_movies
+
+# Delete unnecessary tables
+aws dynamodb delete-table --endpoint-url http://localhost:8111 --table-name Music 
 ```
 
-## Reference for Library Installations
 
-1. Using apollo-server-lambda which uses apollo-server as a base and have the wrapper to create lambda handler to convert event data into graphql query.
-
-```bash
-yarn add apollo-server-lambda graphql
-# build error not found these modules, so manually installed them.
-yarn add bufferutil utf-8-validate
-```
-
-2. Using dynamodb-data-mapper as ORM and aws-sdk for connecting to DynamoDb
-
-```bash
-yarn add @aws/dynamodb-data-mapper aws-sdk @aws/dynamodb-data-mapper-annotations
-```

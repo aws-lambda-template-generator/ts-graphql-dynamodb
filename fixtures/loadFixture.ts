@@ -22,11 +22,14 @@ moviesFixture.map((movie) => {
   fixtures.push(Object.assign(new Movies, movie));
 });
 
-
-mapper.ensureTableExists(Movies, {readCapacityUnits: 5, writeCapacityUnits: 5 })
-  .then(async() => {
-    // eslint-disable-next-line no-unused-vars
-    for await (const persisted of mapper.batchPut(fixtures)) {
-      console.log('fixture loaded');
-    }
-  });
+// Before loading the fixture, we delete the table if exists
+mapper.ensureTableNotExists(Movies)
+  .then(() => {
+    mapper.ensureTableExists(Movies, {readCapacityUnits: 5, writeCapacityUnits: 5 })
+    .then(async() => {
+      // eslint-disable-next-line no-unused-vars
+      for await (const persisted of mapper.batchPut(fixtures)) {
+        console.log('fixture loaded');
+      }
+    });
+  })

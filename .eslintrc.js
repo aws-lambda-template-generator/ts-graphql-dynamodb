@@ -1,10 +1,11 @@
 module.exports = {
+  'root': true,
   'env': {
     'browser': true,
     'commonjs': true,
     'es2021': true
   },
-  parser: '@typescript-eslint/parser',
+  'parser': '@typescript-eslint/parser',
   'extends': 'eslint:recommended',
   'parserOptions': {
     'ecmaVersion': 12,
