@@ -21,12 +21,12 @@ provider:
   runtime: nodejs12.x
   region: ${file(config/account.yml):REGION} # from custom config
   stage: test
-  account: ${file(config/account.yml):ACCOUNT_ID} # from custom config
+  account: ${file(config/account.yml):ACCOUNT_ID} # from custom confiig
   memorySize: 1024
   timeout: 30
   iamRoleStatements: ${file(config/permissions.yml)}
   deploymentBucket:
-    name: ${self:custom.env}-${file(config/account.yml):DEPLOYMENT_BUCKET_BASE} # from custom config
+    name: ${self:custom.env}.${file(config/account.yml):DEPLOYMENT_BUCKET_BASE} # from custom config
     serverSideEncryption: AES256
   environment: ${file(config/env.yml)}
 
@@ -36,7 +36,7 @@ functions:
     name: ${self:custom.functionName}
     events:
       - http:
-          path: graphql/profile
+          path: graphql/movies
           method: post
           cors:
             origin: '*'

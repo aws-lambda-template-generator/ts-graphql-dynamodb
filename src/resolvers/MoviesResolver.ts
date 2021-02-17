@@ -14,10 +14,10 @@ class MovieResolver {
   }
 
   @Query(_returns => Movie)
-  async Movie(@Arg("id") id: string) {
-    return await mapper.get(Object.assign(new Movie, {
-      id
-    }));
+    async Movie(@Arg("id") id: string) {
+      for await (const movie of mapper.query(Movie, { id })) {
+        return movie
+    }
   }
 }
 

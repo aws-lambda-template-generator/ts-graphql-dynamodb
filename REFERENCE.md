@@ -185,7 +185,7 @@ aws dynamodb query \
   --endpoint-url http://localhost:8111 \
   --table-name local_movies \
   --key-condition-expression "id = :id" \
-  --expression-attribute-values  '{":id":{"S":"8f27c1e4-a827-4544-9bdb-6a849499afda"}}'
+  --expression-attribute-values  '{":id":{"S":"ea8663db-29e4-42bd-bf76-04b4b0e2f597"}}'
 ```
 
 ## Reference for Library Installations
@@ -212,6 +212,8 @@ yarn add --dev serverless-offline
 
 ## Reference for dynamodb-data-mapper annotation
 
+This is from googling, but looking at the source code, I don't think it supports GSI or LSI with annotation.
+
 ```ts
 @table('items')
 class Item {
@@ -236,4 +238,28 @@ class Item {
   @attribute()
   bar: string;
 }
+```
+
+## DynamoDB data mapper trouble shoot
+
+1. Error: The number of conditions on the keys is invalid
+
+`GetItem` in DynamoDB needs the same number of key conditions as the number of keys. So, the method below doesn't work when table has hash and range keys.
+
+```ts
+@Query(_returns => Movie)
+  async Movie(@Arg("id") id: string) {
+    return await mapper.get(Object.assign(new Movie, {
+      id
+    }));
+  }
+```
+
+So, using query method is the way to go.
+
+```ts
+@Query(_returns => Movie)
+  async Movie(@Arg("id") id: string) {
+    return await mapper.query(Movie, { id });
+  }
 ```
