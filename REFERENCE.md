@@ -240,7 +240,7 @@ class Item {
 }
 ```
 
-## DynamoDB data mapper trouble shoot
+## DynamoDB data mapper troubleshoot
 
 1. Error: The number of conditions on the keys is invalid
 

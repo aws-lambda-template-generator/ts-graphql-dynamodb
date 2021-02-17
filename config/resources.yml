@@ -2,14 +2,14 @@ MovieTable:
   Type: 'AWS::DynamoDB::Table'
   Properties:
     AttributeDefinitions:
-      - AttributeName: Year
-        AttributeType: N
-      - AttributeName: Title
+      - AttributeName: id
+        AttributeType: S
+      - AttributeName: title
         AttributeType: S
     KeySchema:
-      - AttributeName: Year
+      - AttributeName: id
         KeyType: HASH
-      - AttributeName: Title
+      - AttributeName: title
         KeyType: RANGE
     BillingMode: PAY_PER_REQUEST
     # This is not required because we set BillingMode to Provisioned
@@ -19,3 +19,8 @@ MovieTable:
     #   ReadCapacityUnits: 1
     #   WriteCapacityUnits: 1
     TableName: ${self:custom.env}_movies
+    GlobalSecondaryIndex:
+      IndexName: movieTitleIndex
+      KeySchema:
+        - AttributeName: title
+          KeyType: HASH
