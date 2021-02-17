@@ -4,6 +4,7 @@
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
+    "strictPropertyInitialization": false,
     "lib": [
       "ES2018",
       "ESNext.AsyncIterable"

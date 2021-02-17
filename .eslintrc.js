@@ -4,9 +4,11 @@ module.exports = {
     'commonjs': true,
     'es2021': true
   },
+  parser: '@typescript-eslint/parser',
   'extends': 'eslint:recommended',
   'parserOptions': {
-    'ecmaVersion': 12
+    'ecmaVersion': 12,
+    'sourceType': 'module'
   },
   'rules': {
     semi: ['error', 'always'],
@@ -14,4 +16,3 @@ module.exports = {
     indent: ['error', 2]
   }
 };
-  

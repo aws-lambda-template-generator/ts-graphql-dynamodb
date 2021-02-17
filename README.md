@@ -77,5 +77,5 @@ yarn add bufferutil utf-8-validate
 2. Using dynamodb-data-mapper as ORM and aws-sdk for connecting to DynamoDb
 
 ```bash
-yarn add @aws/dynamodb-data-mapper aws-sdk
+yarn add @aws/dynamodb-data-mapper aws-sdk @aws/dynamodb-data-mapper-annotations
 ```
