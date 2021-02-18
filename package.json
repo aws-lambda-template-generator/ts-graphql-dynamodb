@@ -14,8 +14,14 @@
     "load-fixtures-remote": "ts-node ./fixtures/loadFixtureRemote.ts",
     "dev-server": "nodemon --watch '**/*.ts' --ignore '**/*.spec.ts' --exec 'ts-node' ./local.ts"
   },
-  "repository": "",
-  "author": "Mdh",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aws-lambda-template-generator/ts-graphql-dynamodb"
+  },
+  "keywords": [],
+  "author": "mdh",
+  "license": "ISC",
+  "homepage": "https://github.com/aws-lambda-template-generator",
   "dependencies": {
     "@aws/dynamodb-data-mapper": "^0.7.3",
     "@aws/dynamodb-data-mapper-annotations": "^0.7.3",
