@@ -14,10 +14,6 @@ module.exports = {
     'commonjs': true,
     'es2021': true
   },
-  // Not sure if this is needed...
-  // plugins: [
-  //   '@typescript-eslint',
-  // ],
   parserOptions: {
     ecmaVersion: 12,
     sourceType: 'module',

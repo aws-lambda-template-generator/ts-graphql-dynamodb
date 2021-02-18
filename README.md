@@ -38,7 +38,13 @@ curl -X POST http://localhost:3000/test/graphql/profile --data '{"query": "{movi
 
 Playground is available.
 
-Go to `http://localhost:3000/test/graphql`. You may need to change the actual query url within the query tab to `http://localhost:3000/test/graphql/movies`
+Go to `http://localhost:3000/test/graphql`. You may need to change the actual query url within the query tab to `http://localhost:3000/test/graphql/movies`.
+
+`apollo-server-lambda` uses `apollo-server` under the hood. Therefore, the logic should work when it is replaced ith apollo-server. We can run the application without spinning up a local lambda.
+
+```js
+yarn dev-server
+```
 
 ## Deploy
 

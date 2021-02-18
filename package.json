@@ -11,7 +11,8 @@
     "deploy": "sls deploy --stage test",
     "dev": "sls offline start -r ap-southeast-1 --stage test",
     "load-fixtures": "ts-node ./fixtures/loadFixture.ts && ./fixtures/updateGSI.sh",
-    "load-fixtures-remote": "ts-node ./fixtures/loadFixtureRemote.ts"
+    "load-fixtures-remote": "ts-node ./fixtures/loadFixtureRemote.ts",
+    "dev-server": "nodemon --watch '**/*.ts' --ignore '**/*.spec.ts' --exec 'ts-node' ./local.ts"
   },
   "repository": "",
   "author": "Mdh",
@@ -33,6 +34,7 @@
     "@types/node": "^14.14.22",
     "@typescript-eslint/eslint-plugin": "^4.15.1",
     "@typescript-eslint/parser": "^4.15.1",
+    "apollo-server": "^2.21.0",
     "eslint": "^7.20.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-config-prettier": "^6.15.0",
@@ -44,6 +46,7 @@
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-promise": "^4.2.1",
     "jest": "^26.6.3",
+    "nodemon": "^2.0.7",
     "prettier": "^2.2.1",
     "serverless": "^2.21.1",
     "serverless-offline": "^6.5.0",
