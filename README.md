@@ -33,19 +33,23 @@ docker-compose start
 sls offline start -r ap-southeast-1 --stage test
 
 # Test with curl
-curl -X POST http://localhost:3000/test/graphql/profile --data '{"query": "{books { id author title }}"}'
+curl -X POST http://localhost:3000/test/graphql/profile --data '{"query": "{movies { id title }}"}'
 ```
 
 Playground is available.
 
-Go to `http://localhost:3000/test/graphql`. You may need to change the actual query url within the query tab to `http://localhost:3000/test/graphql/profile`
+Go to `http://localhost:3000/test/graphql`. You may need to change the actual query url within the query tab to `http://localhost:3000/test/graphql/movies`
 
 ## Deploy
 
-Rename the folder: `config_template` --> `config` and fill all the necessary information (account number and AWS regions). Make sure your AWS CLI is configured correctly. Then, use sls command to deploy.
+In `config/account.yml`, you need to fill account, aws region and s3 base url. Make sure your AWS CLI is configured correctly. Then, use sls command to deploy.
 
 ```bash
-sls deplly --stage test
+sls deploy --stage test
+
+# Account can be overriden by passing the --account in sls command
+sls deploy --stage test --acount <your AWS account number>
+
 # load the fixture data. table prefix is set to test_
 yarn load-fixtures-remote
 ```
@@ -62,5 +66,3 @@ aws dynamodb scan --endpoint-url http://localhost:8111 --table-name local_movies
 # Delete unnecessary tables
 aws dynamodb delete-table --endpoint-url http://localhost:8111 --table-name Music 
 ```
-
-
