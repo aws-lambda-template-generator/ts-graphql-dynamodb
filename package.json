@@ -5,12 +5,13 @@
   "scripts": {
     "prettier": "prettier --check src/**/*.ts",
     "fix-prettier": "prettier --write src/**/*.ts src/**/**/*.ts __tests__/**/*.ts",
-    "lint": "./node_modules/.bin/eslint ./",
-    "lint-fixup": "./node_modules/.bin/eslint ./ --ext .js,.jsx --fix",
+    "lint": "./node_modules/.bin/eslint ./ --ext .ts",
+    "lint-fixup": "./node_modules/.bin/eslint ./ --ext .ts,.tsx --fix",
     "check-types": "tsc --noEmit",
     "deploy": "sls deploy --stage test",
     "dev": "sls offline start -r ap-southeast-1 --stage test",
-    "load-fixtures": "ts-node ./fixtures/loadFixture.ts && ./fixtures/updateGSI.sh"
+    "load-fixtures": "ts-node ./fixtures/loadFixture.ts && ./fixtures/updateGSI.sh",
+    "load-fixtures-remote": "ts-node ./fixtures/loadFixtureRemote.ts"
   },
   "repository": "",
   "author": "Mdh",

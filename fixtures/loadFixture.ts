@@ -26,10 +26,10 @@ moviesFixture.map((movie) => {
 mapper.ensureTableNotExists(Movie)
   .then(() => {
     mapper.ensureTableExists(Movie, {readCapacityUnits: 5, writeCapacityUnits: 5 })
-    .then(async() => {
+      .then(async() => {
       // eslint-disable-next-line no-unused-vars
-      for await (const persisted of mapper.batchPut(fixtures)) {
-        console.log('fixture loaded');
-      }
-    });
-  })
+        for await (const persisted of mapper.batchPut(fixtures)) {
+          console.log('fixture loaded');
+        }
+      });
+  });

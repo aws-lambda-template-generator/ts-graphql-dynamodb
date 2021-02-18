@@ -122,6 +122,19 @@ module.exports = {
 };
 ```
 
+3. Error: Error while loading rule '@typescript-eslint/await-thenable': You have used a rule which requires parserServices to be generated. You must therefore provide a value for the "parserOptions.project" property for @typescript-eslint/parser.
+
+This one is easy. We need to add tsconfig in the parserOptions.
+
+```json
+ "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "tsconfig.json",
+    "tsconfigRootDir": "functions" 
+  },
+  "plugins": ["@typescript-eslint"],
+```
+
 ## DynamoDB
 
 1. About local dynamodb setup

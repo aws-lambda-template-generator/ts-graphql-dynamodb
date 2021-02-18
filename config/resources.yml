@@ -19,8 +19,10 @@ MovieTable:
     #   ReadCapacityUnits: 1
     #   WriteCapacityUnits: 1
     TableName: ${self:custom.env}_movies
-    GlobalSecondaryIndex:
-      IndexName: movieTitleIndex
-      KeySchema:
-        - AttributeName: title
-          KeyType: HASH
+    GlobalSecondaryIndexes:
+      - IndexName: movieTitleIndex
+        KeySchema:
+          - AttributeName: title
+            KeyType: HASH
+        Projection:
+          ProjectionType: ALL

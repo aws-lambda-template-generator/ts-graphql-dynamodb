@@ -45,6 +45,6 @@ functions:
           method: get
           cors:
             origin: '*'
-# resources:
-#   Resources: ${file(config/resources.yml)}
+resources:
+  Resources: ${file(config/resources.yml)}
 

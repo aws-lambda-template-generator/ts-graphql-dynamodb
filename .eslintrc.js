@@ -1,29 +1,27 @@
 module.exports = {
   root: true,
   parser: '@typescript-eslint/parser',
-  // extends: [
-  //   'airbnb-base',
-  //   'plugin:@typescript-eslint/recommended',
-  //   'plugin:@typescript-eslint/recommended-requiring-type-checking',
-  //   'plugin:fp/recommended',
-  //   'plugin:prettier/recommended',
-  //   'plugin:import/typescript',
-  // ],
   extends: [
-    'plugin:@typescript-eslint/recommended',
-    'plugin:import/typescript',
+    // 'airbnb-base',
+    // 'plugin:@typescript-eslint/recommended',
+    // 'plugin:@typescript-eslint/recommended-requiring-type-checking',
+    // 'plugin:prettier/recommended',
+    // 'plugin:import/typescript',
   ],
   env: {
+    'jest': true,
     'browser': true,
     'commonjs': true,
     'es2021': true
   },
-  plugins: [
-    '@typescript-eslint',
-  ],
+  // Not sure if this is needed...
+  // plugins: [
+  //   '@typescript-eslint',
+  // ],
   parserOptions: {
-    'ecmaVersion': 12,
-    'sourceType': 'module'
+    ecmaVersion: 12,
+    sourceType: 'module',
+    project: 'tsconfig.json'
   },
   settings: {
     'import/parsers': {

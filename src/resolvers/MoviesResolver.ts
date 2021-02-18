@@ -1,4 +1,4 @@
-import { Arg, Query, Resolver } from "type-graphql";
+import { Arg, Query, Resolver } from 'type-graphql';
 import mapper from '../database';
 import { Movie } from '../models/Movie';
 
@@ -14,9 +14,9 @@ class MovieResolver {
   }
 
   @Query(_returns => Movie)
-    async Movie(@Arg("id") id: string) {
-      for await (const movie of mapper.query(Movie, { id })) {
-        return movie
+  async Movie(@Arg('id') id: string) {
+    for await (const movie of mapper.query(Movie, { id })) {
+      return movie;
     }
   }
 }

@@ -22,5 +22,5 @@
     "strictNullChecks": true
   },
   "exclude": ["node_modules", "src/**/*.test.ts"],
-  "include": ["src/**/*.ts"]
+  "include": ["src/**/*.ts", "**/*.ts"]
 }

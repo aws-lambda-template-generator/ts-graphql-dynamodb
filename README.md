@@ -46,6 +46,8 @@ Rename the folder: `config_template` --> `config` and fill all the necessary inf
 
 ```bash
 sls deplly --stage test
+# load the fixture data. table prefix is set to test_
+yarn load-fixtures-remote
 ```
 
 ## Useful DynamoDB AWS CLI Commands
