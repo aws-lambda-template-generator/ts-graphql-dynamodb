@@ -43,15 +43,18 @@ export class Movie {
   cast: Cast[];
 
   @attribute()
+  @Field()
   description: string;
 
   @attribute()
-  whySHouldWeWatch: string;
+  @Field()
+  whyShouldWeWatch: string;
 
   @attribute({memberType: embed(Quote)})
   @Field(_type => [Quote])
   quotes: Quote[];
 
   @attribute()
+  @Field()
   language: string;
 }

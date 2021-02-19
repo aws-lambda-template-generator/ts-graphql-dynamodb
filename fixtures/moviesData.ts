@@ -55,7 +55,7 @@ export const moviesFixture = [
         ]
       }
     ],
-    Language: 'English'
+    language: 'English'
   },
   {
     year: '1882',
@@ -112,7 +112,7 @@ export const moviesFixture = [
         ]
       }
     ],
-    Language: 'English'
+    language: 'English'
   },
   {
     year: '1882',
@@ -170,7 +170,7 @@ export const moviesFixture = [
         ]
       }
     ],
-    Language: 'English'
+    language: 'English'
   },
   {
     year: '1884',
@@ -239,7 +239,7 @@ export const moviesFixture = [
         ]
       }
     ],
-    Language: 'English'
+    language: 'English'
   },
   {
     year: '1887',
@@ -317,6 +317,6 @@ export const moviesFixture = [
         ]
       },
     ],
-    Language: 'English'
+    language: 'English'
   },
 ];
