@@ -323,14 +323,32 @@ query getMovieById {
     }
   }
 }
+
+query getMovieByIdAndYear {
+  movieByIdAndYear(id:"a64a8436-a7c5-4751-b0e1-1583958756bf", year: 1882) {
+    id
+    title
+    year
+  }
+}
 ```
 
 2. Mutations
 
 ```graphql
+
+mutation removeMovie {
+  removeMovie(year: 2000, id:"02a81d3a-d1bd-47da-ba3b-e8968d63c5c9") {
+    id
+    title
+    year
+    country
+  }
+}
+
 mutation createMovie {
   addOrUpdateMovie(MovieInput: {
-    
+      id: "new"
       title: "New Entry - Full Metal Jacket",
       year: 1887,
       country: "United States",

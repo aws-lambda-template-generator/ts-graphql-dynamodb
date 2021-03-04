@@ -58,7 +58,7 @@ export const moviesFixture = [
     language: 'English'
   },
   {
-    year: '1882',
+    year: '1982',
     title: 'Blade Runner',
     country: 'United States',
     director: 'Ridley Scott',
@@ -115,7 +115,7 @@ export const moviesFixture = [
     language: 'English'
   },
   {
-    year: '1882',
+    year: '1982',
     title: 'E.T. the Extra-Terrestrial',
     country: 'United States',
     director: 'Steven Spielberg',
@@ -173,7 +173,7 @@ export const moviesFixture = [
     language: 'English'
   },
   {
-    year: '1884',
+    year: '1984',
     title: 'Scarface',
     country: 'United States',
     director: 'Brian De Palma',
@@ -242,7 +242,7 @@ export const moviesFixture = [
     language: 'English'
   },
   {
-    year: '1887',
+    year: '1987',
     title: 'Full Metal Jacket',
     country: 'United States',
     director: 'Stanley Kubrick',

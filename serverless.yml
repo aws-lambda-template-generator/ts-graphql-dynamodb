@@ -18,7 +18,7 @@ custom:
 
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs14.x
   region: ${file(config/account.yml):REGION} # from custom config
   stage: test
   account: ${file(config/account.yml):ACCOUNT_ID} # from custom confiig
