@@ -1,7 +1,6 @@
 import { Arg, Mutation, Query, Resolver } from 'type-graphql';
 import mapper from '../database';
 import { Movie } from '../models/Movie';
-import { MovieInput } from '../models/InputTypes/MovieInput';
 
 @Resolver(_of => Movie)
 class MovieResolver {
