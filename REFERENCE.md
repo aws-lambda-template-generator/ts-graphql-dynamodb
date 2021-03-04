@@ -329,9 +329,9 @@ query getMovieById {
 
 ```graphql
 mutation createMovie {
-  createMovie(movie: {
+  addOrUpdateMovie(MovieInput: {
     
-      title: "Full Metal Jacket",
+      title: "New Entry - Full Metal Jacket",
       year: 1887,
       country: "United States",
       director: "Stanley Kubrick",

@@ -1,7 +1,7 @@
 import { Arg, Mutation, Query, Resolver } from 'type-graphql';
 import mapper from '../database';
 import { Movie } from '../models/Movie';
-import { MovieInput } from '../models/inputTypes/MovieInput';
+import { MovieInput } from '../models/InputTypes/MovieInput';
 
 @Resolver(_of => Movie)
 class MovieResolver {
@@ -35,15 +35,17 @@ class MovieResolver {
   }
 
   @Mutation(_returns => Movie)
-  async createMovie(@Arg('movie') movie: MovieInput) {
-    mapper.put(Object.assign(new Movie, movie))
-      .then(movie => movie);
-  }
-
-  @Mutation(_returns => Movie)
-  async updateMovie(@Arg('movie') movie: MovieInput) {
-    mapper.update(Object.assign(new Movie, movie))
-      .then(movie => movie);
+  async addOrUpdateMovie(@Arg('MovieInput') movie: Movie) {
+   
+    // Because we are using the same model for Mutation Input, Query Result and ORM,
+    // id is required for graphql. However, the new entry does not have id
+    // because it is created by DybamoDB automatically. 
+    // Therefore, the new movie will pass 'new' as an id and remove this
+    // before inserting into a table.
+    if (movie.id === 'new') {
+      delete movie['id'];
+    }
+    return await mapper.put(movie);
   }
 }
 
