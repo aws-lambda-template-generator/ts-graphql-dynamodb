@@ -6,6 +6,8 @@ MovieTable:
         AttributeType: S
       - AttributeName: year
         AttributeType: N
+      - AttributeName: title
+        AttributeType: S
     KeySchema:
       - AttributeName: id
         KeyType: HASH

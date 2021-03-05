@@ -22,8 +22,7 @@ class MovieResolver {
 
   @Query(_returns => Movie)
   async movieByIdAndYear(@Arg('id') id: string, @Arg('year') year: number) {
-    mapper.get(Object.assign(new Movie, { id, year }))
-      .then(item => item);
+    return await mapper.get(Object.assign(new Movie, { id, year }));
   }
 
   @Mutation(_returns => Movie)
