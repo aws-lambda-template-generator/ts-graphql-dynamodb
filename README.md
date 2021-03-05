@@ -1,5 +1,7 @@
 # TypeScript Lambda GraphQL with DynamoDb
 
+This function provides GraphQL endpoints for movie data. Data us stored in DynamoDb. It can return all the movie data, query movie by id, query movie by id and year, delete movie by id and year and add or update movie. 
+
 ## Tools
 
 - yarn

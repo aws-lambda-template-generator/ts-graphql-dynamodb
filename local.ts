@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import { ApolloServer } from 'apollo-server';
 import { buildSchema } from 'type-graphql';
 import resolvers from './src/resolvers';
@@ -14,6 +15,6 @@ const startServer = async () => {
   server.listen().then(({ url }) => {
     console.log(`🚀 Server ready at ${url}`);
   });
-}
+};
 
 startServer();

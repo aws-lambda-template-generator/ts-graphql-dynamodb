@@ -1,7 +1,8 @@
 import { attribute } from '@aws/dynamodb-data-mapper-annotations';
-import { ObjectType, Field } from 'type-graphql';
+import { ObjectType, Field, InputType } from 'type-graphql';
 
 @ObjectType()
+@InputType('CastInput')
 export class Cast {
   @attribute()
   @Field()

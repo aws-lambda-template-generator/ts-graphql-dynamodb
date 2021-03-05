@@ -9,7 +9,7 @@
     "lint-fixup": "./node_modules/.bin/eslint ./ --ext .ts,.tsx --fix",
     "check-types": "tsc --noEmit",
     "deploy": "sls deploy --stage test",
-    "dev": "sls offline start -r ap-southeast-1 --stage test",
+    "dev": "sls offline start -r ap-southeast-1 --stage local",
     "load-fixtures": "ts-node ./fixtures/loadFixture.ts && ./fixtures/updateGSI.sh",
     "load-fixtures-remote": "ts-node ./fixtures/loadFixtureRemote.ts",
     "dev-server": "nodemon --watch '**/*.ts' --ignore '**/*.spec.ts' --exec 'ts-node' ./local.ts"
@@ -55,7 +55,7 @@
     "nodemon": "^2.0.7",
     "prettier": "^2.2.1",
     "serverless": "^2.21.1",
-    "serverless-offline": "^6.5.0",
+    "serverless-offline": "^6.8.0",
     "serverless-plugin-git-variables": "^5.1.0",
     "serverless-webpack": "^5.3.3",
     "ts-loader": "^8.0.2",
