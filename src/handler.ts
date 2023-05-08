@@ -13,7 +13,12 @@ const createHandler = async () => {
     schema,
   });
 
-  return apolloServer.createHandler();
+  return apolloServer.createHandler({
+    cors: {
+      origin: '*',
+      credentials: true,
+    },
+  });
 };
 
 export const graphqlHandler: APIGatewayProxyHandler = (

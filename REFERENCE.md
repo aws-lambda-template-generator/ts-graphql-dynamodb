@@ -31,23 +31,23 @@ Config that giving us the error
 
 ```js
 module.exports = {
-  'root': true,
-  'env': {
-    'browser': true,
-    'commonjs': true,
-    'es2021': true
+  root: true,
+  env: {
+    browser: true,
+    commonjs: true,
+    es2021: true,
   },
-  'parser': '@typescript-eslint/parser',
-  'extends': 'eslint:recommended',
-  'parserOptions': {
-    'ecmaVersion': 12,
-    'sourceType': 'module'
+  parser: '@typescript-eslint/parser',
+  extends: 'eslint:recommended',
+  parserOptions: {
+    ecmaVersion: 12,
+    sourceType: 'module',
   },
-  'rules': {
+  rules: {
     semi: ['error', 'always'],
     quotes: [2, 'single'],
-    indent: ['error', 2]
-  }
+    indent: ['error', 2],
+  },
 };
 ```
 
@@ -56,32 +56,21 @@ Update
 ```js
 module.exports = {
   root: true,
-  extends: [
-    'airbnb-base',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:@typescript-eslint/recommended-requiring-type-checking',
-    'plugin:fp/recommended',
-    'plugin:prettier/recommended',
-    'plugin:import/typescript',
-  ],
+  extends: ['airbnb-base', 'plugin:@typescript-eslint/recommended', 'plugin:@typescript-eslint/recommended-requiring-type-checking', 'plugin:fp/recommended', 'plugin:prettier/recommended', 'plugin:import/typescript'],
   env: {
     node: true,
     jest: true,
   },
   parser: '@typescript-eslint/parser',
-  plugins: [
-    '@typescript-eslint',
-    'jest',
-    'fp',
-  ],
+  plugins: ['@typescript-eslint', 'jest', 'fp'],
   settings: {
     'import/parsers': {
       '@typescript-eslint/parser': ['.ts'],
     },
     'import/resolver': {
       node: {
-          extensions: ['.ts'],
-          paths: ['node_modules/', 'node_modules/@types']
+        extensions: ['.ts'],
+        paths: ['node_modules/', 'node_modules/@types'],
       },
       typescript: {},
     },
@@ -95,10 +84,10 @@ module.exports = {
     'import/no-extraneous-dependencies': 'off',
     'import/extensions': ['error', 'never'],
     'import/prefer-default-export': 'off',
-    'radix': 'off',
+    radix: 'off',
     semi: ['error', 'always'],
     quotes: [2, 'single'],
-    indent: ['error', 2]
+    indent: ['error', 2],
   },
   overrides: [
     // Models use classes and decorators
@@ -118,7 +107,7 @@ module.exports = {
         'fp/no-nil': ['off'],
       },
     },
-  ]
+  ],
 };
 ```
 
@@ -130,9 +119,32 @@ This one is easy. We need to add tsconfig in the parserOptions.
  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "project": "tsconfig.json",
-    "tsconfigRootDir": "functions" 
+    "tsconfigRootDir": "functions"
   },
   "plugins": ["@typescript-eslint"],
+```
+
+## Getting around cors issue
+
+We need to add `{ cors: { origin: '*', credentials: true,}` when we create a handler.
+
+```ts
+const createHandler = async () => {
+  const schema = await buildSchema({
+    resolvers,
+  });
+
+  const apolloServer = new ApolloServer({
+    schema,
+  });
+
+  return apolloServer.createHandler({
+    cors: {
+      origin: '*',
+      credentials: true,
+    },
+  });
+};
 ```
 
 ## DynamoDB
@@ -156,7 +168,7 @@ aws dynamodb list-tables --endpoint-url http://localhost:8111
 aws dynamodb scan --endpoint-url http://localhost:8111 --table-name local_movies
 
 # Delete unnecessary tables
-aws dynamodb delete-table --endpoint-url http://localhost:8111 --table-name Music 
+aws dynamodb delete-table --endpoint-url http://localhost:8111 --table-name Music
 ```
 
 2. Command example to create a table with CLI
@@ -230,10 +242,11 @@ This is from googling, but looking at the source code, I don't think it supports
 ```ts
 @table('items')
 class Item {
-  @hashKey({ // <-- this is your normal hash key (shared by table and of LSI)
-    indexKeyConfigurations:{
-      ItemIdIndex: 'HASH' // The key (ItemIdIndex) is the name of the index; the value is the key type ('HASH' or 'RANGE')
-    }
+  @hashKey({
+    // <-- this is your normal hash key (shared by table and of LSI)
+    indexKeyConfigurations: {
+      ItemIdIndex: 'HASH', // The key (ItemIdIndex) is the name of the index; the value is the key type ('HASH' or 'RANGE')
+    },
   })
   itemId: string;
 
@@ -243,8 +256,8 @@ class Item {
   @attribute({
     // And this other attribute acts as the LSI's RangeKey
     indexKeyConfigurations: {
-      ItemIdIndex: 'RANGE'
-    }
+      ItemIdIndex: 'RANGE',
+    },
   })
   foo: string;
 
@@ -290,7 +303,7 @@ query getAllMovies {
     country
     director
     description
-		whyShouldWeWatch
+    whyShouldWeWatch
     language
     genra
     cast {
@@ -304,14 +317,14 @@ query getAllMovies {
 }
 
 query getMovieById {
-  movieById(id: "5a28c037-10b9-4bac-8ebe-87df63ad1b0b"){
+  movieById(id: "5a28c037-10b9-4bac-8ebe-87df63ad1b0b") {
     id
     title
     year
     country
     director
     description
-		whyShouldWeWatch
+    whyShouldWeWatch
     language
     genra
     cast {
@@ -325,7 +338,7 @@ query getMovieById {
 }
 
 query getMovieByIdAndYear {
-  movieByIdAndYear(id:"a64a8436-a7c5-4751-b0e1-1583958756bf", year: 1882) {
+  movieByIdAndYear(id: "a64a8436-a7c5-4751-b0e1-1583958756bf", year: 1882) {
     id
     title
     year
@@ -336,9 +349,8 @@ query getMovieByIdAndYear {
 2. Mutations
 
 ```graphql
-
 mutation removeMovie {
-  removeMovie(year: 2000, id:"02a81d3a-d1bd-47da-ba3b-e8968d63c5c9") {
+  removeMovie(year: 2000, id: "02a81d3a-d1bd-47da-ba3b-e8968d63c5c9") {
     id
     title
     year
@@ -347,84 +359,23 @@ mutation removeMovie {
 }
 
 mutation createMovie {
-  addOrUpdateMovie(MovieInput: {
-      id: "new"
-      title: "New Entry - Full Metal Jacket",
-      year: 1887,
-      country: "United States",
-      director: "Stanley Kubrick",
-      description: "A classic Vietnam war film by Kubric",
-      whyShouldWeWatch: "The intensity of the subject matter, acting and storyline makes this film a must-see.",
-      language: "English",
-      genra: [
-        "War"
-      ],
-      cast: [
-        {
-          character: "Private/Sergeant J. T. \"Joker\" Davis",
-          actor: "Matthew Modine"
-        },
-        {
-          character: "Private Leonard \"Gomer Pyle\" Lawrence",
-          actor: "Vincent D'Onofrio"
-        },
-        {
-          character: "Gunnery Sergeant Hartman",
-          actor: "Lee Ermey"
-        },
-        {
-          character: "Private/Sergeant \"Cowboy\" Evans",
-          actor: "Arliss Howard"
-        },
-        {
-          character: "Animal Mother",
-          actor: "Adam Baldwin"
-        }
-      ],
-      quotes: [
-        {
-          quote: "Soldiers: This is my rifle. There are many others like it, but this one is mine. My rifle is my best friend. It is my life. I must master it as I must master my life. Without me, my rifle is useless. Without my rifle, I am useless. I must fire my rifle true. I must shoot straighter than my enemy, who is trying to kill me. I must shoot him before he shoots me. I will. Before God I swear this creed: my rifle and myself are defenders of my country, we are the masters of our enemy, we are the saviors of my life. So be it, until there is no enemy, but peace. Amen."
-        },
-        {
-          quote: "Gunnery Sgt. Hartman: I am Gunnery Sgt. Hartman, your senior drill instructor. From now on you will speak only when spoken to, and the first and last words out of your filthy sewers will be 'Sir.' Do you maggots understand that?"
-        },
-        {
-          quote: "Pvt. Pyle: Seven-six-two-millimeter, full metal jacket."
-        },
-        {
-          quote: "Gunnery Sgt. Hartman: There is no racial bigatory here. I don't look down on nigger, kikes, wogs or greasers. Here, you're all equally worthless."
-        },
-        {
-          quote: "Gunnery Sgt. Hartman: Do you maggots understand that?,Soldiers: Sir, yes, sir,Gunnery Sgt. Hartman: Bullshit, I can't hear you."
-        },
-        {
-          quote: "Alejandro Sosa: I told you a long time ago, you fucking little monkey, not to fuck me!"
-        },
-        {
-          quote: "Gunnery Sgt. Hartman: Holy Jesus! What is that? What the fuck is that?! What is that, Pvt. Pyle?,Pvt. Pyle: Sir, a jelly doughnut, sir!,Gunnery Sgt. Hartman: A Jelly doughnut?"
-        },
-        {
-          quote: "Da Nang Hooker: Well, baby, me so horny. Me so HORNY. Me love you long time. You party?"
-        }
-      ]
-    }) {
-      id
-      title
-      year
-      country
-      director
-      description
-      whyShouldWeWatch
-      language
-      genra
-      cast {
-        character
-        actor
-      }
-      quotes {
-        quote
-      }
+  addOrUpdateMovie(MovieInput: { id: "new", title: "New Entry - Full Metal Jacket", year: 1887, country: "United States", director: "Stanley Kubrick", description: "A classic Vietnam war film by Kubric", whyShouldWeWatch: "The intensity of the subject matter, acting and storyline makes this film a must-see.", language: "English", genra: ["War"], cast: [{ character: "Private/Sergeant J. T. \"Joker\" Davis", actor: "Matthew Modine" }, { character: "Private Leonard \"Gomer Pyle\" Lawrence", actor: "Vincent D'Onofrio" }, { character: "Gunnery Sergeant Hartman", actor: "Lee Ermey" }, { character: "Private/Sergeant \"Cowboy\" Evans", actor: "Arliss Howard" }, { character: "Animal Mother", actor: "Adam Baldwin" }], quotes: [{ quote: "Soldiers: This is my rifle. There are many others like it, but this one is mine. My rifle is my best friend. It is my life. I must master it as I must master my life. Without me, my rifle is useless. Without my rifle, I am useless. I must fire my rifle true. I must shoot straighter than my enemy, who is trying to kill me. I must shoot him before he shoots me. I will. Before God I swear this creed: my rifle and myself are defenders of my country, we are the masters of our enemy, we are the saviors of my life. So be it, until there is no enemy, but peace. Amen." }, { quote: "Gunnery Sgt. Hartman: I am Gunnery Sgt. Hartman, your senior drill instructor. From now on you will speak only when spoken to, and the first and last words out of your filthy sewers will be 'Sir.' Do you maggots understand that?" }, { quote: "Pvt. Pyle: Seven-six-two-millimeter, full metal jacket." }, { quote: "Gunnery Sgt. Hartman: There is no racial bigatory here. I don't look down on nigger, kikes, wogs or greasers. Here, you're all equally worthless." }, { quote: "Gunnery Sgt. Hartman: Do you maggots understand that?,Soldiers: Sir, yes, sir,Gunnery Sgt. Hartman: Bullshit, I can't hear you." }, { quote: "Alejandro Sosa: I told you a long time ago, you fucking little monkey, not to fuck me!" }, { quote: "Gunnery Sgt. Hartman: Holy Jesus! What is that? What the fuck is that?! What is that, Pvt. Pyle?,Pvt. Pyle: Sir, a jelly doughnut, sir!,Gunnery Sgt. Hartman: A Jelly doughnut?" }, { quote: "Da Nang Hooker: Well, baby, me so horny. Me so HORNY. Me love you long time. You party?" }] }) {
+    id
+    title
+    year
+    country
+    director
+    description
+    whyShouldWeWatch
+    language
+    genra
+    cast {
+      character
+      actor
     }
+    quotes {
+      quote
+    }
+  }
 }
-
 ```

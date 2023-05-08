@@ -9,19 +9,19 @@ custom:
   stage: ${opt:stage, self:provider.stage}
   region: ${opt:region, self:provider.region}
   resourcePrefix: ${self:service}-${self:custom.stage}
+  # this is used in permission.yml. Use yarn deploy --param="accountId=123123"
+  accountId: ${param:accountId}
   env: ${opt:env, self:custom.stage}
-  account: ${opt:account, self:provider.account}
   functionName: ${self:custom.env}-ts-graphql-dynamodb # This is the function name appears in the AWS lambda console.
-  description: Lamda Service for Profiles
+  description: Lamda GraphQL DynamoDB Example
   webpack:
     includeModules: true
 
 provider:
   name: aws
-  runtime: nodejs12.x # Latest is 14, but not yet supported by serverless offline...
+  runtime: nodejs16.x
   region: ${file(config/account.yml):REGION} # from custom config
   stage: test
-  account: ${file(config/account.yml):ACCOUNT_ID} # from custom confiig
   memorySize: 1024
   timeout: 30
   iamRoleStatements: ${file(config/permissions.yml)}
@@ -31,7 +31,7 @@ provider:
   environment: ${file(config/env.yml)}
 
 functions:
-  profilesLambda:
+  moviesLambda:
     handler: src/handler.graphqlHandler # name of the handler function in src/handler.js
     name: ${self:custom.functionName}
     events:
